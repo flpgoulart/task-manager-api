@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
 
+  # o comando build só cria em memória e não grava em banco, recomendado nos testes de model
   let(:user) { build(:user) }
 
   #it { expect(user).to respond_to(:email) }
