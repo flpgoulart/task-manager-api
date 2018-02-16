@@ -31,9 +31,18 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_confirmation_of(:password) }
   it { is_expected.to allow_value('flpgoulart@gmail.com').for(:email) }
 
+  it { is_expected.to validate_uniqueness_of(:auth_token) }
   #it { is_expected.to validate_numericality_of(:age) }
 
+  #implementa um teste de instancia, neste caso o info é definido como um método dentro do model user
+  describe '#info' do
+    it 'returns email and created_at' do 
+      user.save!
 
+      expect(user.info).to eq("#{user.email} - #{user.created_at}")
+    end
+  end
+  
 
   # outras maneiras de se fazer o teste
   #before { @user = FactoryGirl.build(:user) }
