@@ -1,7 +1,9 @@
 require 'api_version_constraint'
 
 Rails.application.routes.draw do
-  devise_for :users
+  #comentado a linha abaixo para que o devise_for não atrapalhe as rotas que definimos abaixo
+  # devise_for :users
+  
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   # namespace é utilizado para agrupar os Controles (controllers), de forma a melhorar o codigo
