@@ -17,6 +17,8 @@ class Api::V1::UsersController < ApplicationController
         if user.save
             render json: user, status: 201
         else
+            # byebug #excelente ferramenta para debugar código, deste ponto para frente ele gera um debug passo a passo com a posssibilidade de acessar qualquer variavel local
+            #para continuar o debug, é só apertar a letra 'c' 
             render json: { errors: user.errors }, status: 422
         end
     end
