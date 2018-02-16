@@ -76,7 +76,7 @@ RSpec.describe 'Users API', type: :request do
     end
   end
 
-  #para atualizar um dado -
+  #para atualizar um dado -update
   describe 'PUT /users/:id' do
 
     before do
@@ -108,6 +108,23 @@ RSpec.describe 'Users API', type: :request do
         user_response = JSON.parse(response.body, symbolize_names: true)
         expect(user_response).to have_key(:errors) 
       end
+    end
+    
+  end
+  
+  #para excluir um dado -destroy
+  describe 'DELETE /users/:id' do
+    before do
+      headers = { 'Accept' => 'application/vnd.taskmanager.v1'}
+      delete "/users/#{user_id}", params: {}, headers: headers
+    end
+    
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204) 
+    end
+
+    it 'removes the user from database' do 
+      expect(User.find_by(id: user.id)).to be_nil
     end
     
   end
