@@ -19,9 +19,10 @@ RSpec.describe 'Users API', type: :request do
       context 'when the user exists' do
         it 'returns the user' do
           #nesta instrução, eu pego o resultado da minha requisição GET e converto para JSON o Body da mensagem
-          user_response = JSON.parse(response.body)
+          # o symbolize_names: true, permite acessar a propriedade do user_response como simbolo (:id) e não string ('id') 
+          user_response = JSON.parse(response.body, symbolize_names: true)
           # Espero que o ID contido no Body seja igual ao user_id definido no inicio do comando
-          expect(user_response['id']).to eq(user_id)
+          expect(user_response[:id]).to eq(user_id)
         end
         
         #compara se deu tudo certo na requisição, esperado para o código 200
@@ -53,8 +54,8 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns json data for the created user' do
-        user_response = JSON.parse(response.body)
-        expect(user_response['email']).to eq(user_params[:email]) 
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response[:email]).to eq(user_params[:email]) 
       end
       
     end
@@ -67,8 +68,8 @@ RSpec.describe 'Users API', type: :request do
       end 
 
       it 'returns the json data for the errors' do
-        user_response = JSON.parse(response.body)
-        expect(user_response).to have_key('errors') 
+        user_response = JSON.parse(response.body, symbolize_names: true)
+        expect(user_response).to have_key(:errors) 
       end
     end
   end
