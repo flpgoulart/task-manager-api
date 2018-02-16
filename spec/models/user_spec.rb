@@ -36,10 +36,13 @@ RSpec.describe User, type: :model do
 
   #implementa um teste de instancia, neste caso o info é definido como um método dentro do model user
   describe '#info' do
-    it 'returns email and created_at' do 
+    it 'returns email, created_at and a Token' do 
       user.save!
 
-      expect(user.info).to eq("#{user.email} - #{user.created_at}")
+      #neste caso, ele cria um metodo duble que substitui o original Devise.friendly_token
+      allow(Devise).to receive(:friendly_token).and_return('abc123xyzTOKEN')
+
+      expect(user.info).to eq("#{user.email} - #{user.created_at} - Token: abc123xyzTOKEN")
     end
   end
   
