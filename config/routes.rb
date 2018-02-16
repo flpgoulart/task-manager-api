@@ -18,7 +18,7 @@ Rails.application.routes.draw do
     # o ApiVersionConstraint é uma classe criada, e está localizada na pasta "lib"
     namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1, default: true) do
       #irá criar a rota para o users e somente para a action show
-      resources :users, only: [:show]
+      resources :users, only: [:show, :create]
     end
   end 
 end
