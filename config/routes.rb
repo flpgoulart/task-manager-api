@@ -1,8 +1,8 @@
 require 'api_version_constraint'
 
 Rails.application.routes.draw do
-  #comentado a linha abaixo para que o devise_for não atrapalhe as rotas que definimos abaixo
-  # devise_for :users
+
+  devise_for :users, only: [:sessions], controllers: {sessions: 'api/v1/sessions'}
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1, default: true) do
       #irá criar a rota para o users e somente para a action show
       resources :users, only: [:show, :create, :update, :destroy]
+      resources :sessions, only: [:create]
     end
   end 
 end
