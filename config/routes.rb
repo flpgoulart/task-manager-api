@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1, default: true) do
       #irá criar a rota para o users e somente para a action show
       resources :users, only: [:show, :create, :update, :destroy]
-      resources :sessions, only: [:create]
+      resources :sessions, only: [:create, :destroy]
     end
   end 
 end
