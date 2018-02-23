@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       #irá criar a rota para o users e somente para a action show
       resources :users, only: [:show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]
-      resources :tasks, only: [:index, :show]
+      resources :tasks, only: [:index, :show, :create]
     end
   end 
 end
