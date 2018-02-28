@@ -16,7 +16,15 @@ Rails.application.routes.draw do
     # o comando path neste caso, evita que o usuário tenha que informar a versão na URL
     # o controle da versão está pelo cabeçalho http, informando a versão na requisição esse dado
     # o ApiVersionConstraint é uma classe criada, e está localizada na pasta "lib"
-    namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1, default: true) do
+    namespace :v1, path: '/', constraints: ApiVersionConstraint.new(version: 1) do
+      #irá criar a rota para o users e somente para a action show
+      resources :users, only: [:show, :create, :update, :destroy]
+      resources :sessions, only: [:create, :destroy]
+      resources :tasks, only: [:index, :show, :create, :update, :destroy]
+    end
+
+    #por questão de leitura e interpretação das rotas, é sempre importante o bloca da versão default ficar por ultimo no código
+    namespace :v2, path: '/', constraints: ApiVersionConstraint.new(version: 2, default: true) do
       #irá criar a rota para o users e somente para a action show
       resources :users, only: [:show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]
