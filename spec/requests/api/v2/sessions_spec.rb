@@ -25,7 +25,7 @@ RSpec.describe 'Sessions API', type: :request do
             it 'returns the json data for the user with auth token' do
                 #recarrega o usuário após o sign-in, porque o token é alterado
                 user.reload 
-                expect(json_body[:auth_token]).to eq(user.auth_token) 
+                expect(json_body[:data][:attributes][:'auth-token']).to eq(user.auth_token) 
             end
         end
 
