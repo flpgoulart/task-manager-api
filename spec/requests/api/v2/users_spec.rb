@@ -28,7 +28,7 @@ RSpec.describe 'Users API', type: :request do
       context 'when the user exists' do
         it 'returns the user' do
           # Espero que o ID contido no Body seja igual ao user_id definido no inicio do comando
-          expect(json_body[:id]).to eq(user_id)
+          expect(json_body[:data][:id].to_i).to eq(user_id)
         end
         
         #compara se deu tudo certo na requisição, esperado para o código 200
@@ -60,7 +60,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns json data for the created user' do
-        expect(json_body[:email]).to eq(user_params[:email]) 
+        expect(json_body[:data][:attributes][:email]).to eq(user_params[:email]) 
       end
       
     end
@@ -93,7 +93,7 @@ RSpec.describe 'Users API', type: :request do
       end
 
       it 'returns the json data for the update user' do
-        expect(json_body[:email]).to eq(user_params[:email])
+        expect(json_body[:data][:attributes][:email]).to eq(user_params[:email])
       end 
     end
 
