@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
     #por questão de leitura e interpretação das rotas, é sempre importante o bloca da versão default ficar por ultimo no código
     namespace :v2, path: '/', constraints: ApiVersionConstraint.new(version: 2, default: true) do
+      mount_devise_token_auth_for 'User', at: 'auth'
       #irá criar a rota para o users e somente para a action show
       resources :users, only: [:show, :create, :update, :destroy]
       resources :sessions, only: [:create, :destroy]

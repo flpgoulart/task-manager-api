@@ -29,7 +29,7 @@ RSpec.describe User, type: :model do
   #este metodo é utilizando o shouda_matric, para validar a mesma instrução acima, usando apenas 1 linha
   #it { is_expected.to validate_presence_of(:name) }
   it { is_expected.to validate_presence_of(:email) }
-  it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+  #it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
   it { is_expected.to validate_confirmation_of(:password) }
   it { is_expected.to allow_value('flpgoulart@gmail.com').for(:email) }
 
