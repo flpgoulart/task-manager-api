@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180418083450) do
+ActiveRecord::Schema.define(version: 20180418090156) do
 
   create_table "task_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -20,12 +20,14 @@ ActiveRecord::Schema.define(version: 20180418083450) do
 
   create_table "tasks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
-    t.text     "description", limit: 65535
-    t.boolean  "done",                      default: false
+    t.text     "description",  limit: 65535
+    t.boolean  "done",                       default: false
     t.datetime "deadline"
     t.integer  "user_id"
-    t.datetime "created_at",                                null: false
-    t.datetime "updated_at",                                null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.integer  "task_type_id"
+    t.index ["task_type_id"], name: "index_tasks_on_task_type_id", using: :btree
     t.index ["user_id"], name: "index_tasks_on_user_id", using: :btree
   end
 
@@ -53,5 +55,6 @@ ActiveRecord::Schema.define(version: 20180418083450) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "tasks", "task_types"
   add_foreign_key "tasks", "users"
 end

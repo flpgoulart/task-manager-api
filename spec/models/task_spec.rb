@@ -9,9 +9,11 @@ RSpec.describe Task, type: :model do
   end
 
   it { is_expected.to belong_to(:user) }
+  it { is_expected.to belong_to(:task_type) }
 
   it { is_expected.to validate_presence_of :title }
   it { is_expected.to validate_presence_of :user_id }
+  it { is_expected.to validate_presence_of :task_type_id }
   
   # este passo é importante listar todos os campos previstos na aplicação, caso tenha algum não previsto, ele acusará no teste
   it { is_expected.to respond_to(:title) }
@@ -19,5 +21,6 @@ RSpec.describe Task, type: :model do
   it { is_expected.to respond_to(:deadline) }
   it { is_expected.to respond_to(:done) }
   it { is_expected.to respond_to(:user_id) }
+  it { is_expected.to respond_to(:task_type_id) }
   
 end

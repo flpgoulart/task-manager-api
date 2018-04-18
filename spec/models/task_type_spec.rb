@@ -7,5 +7,6 @@ RSpec.describe TaskType, type: :model do
 
   # este passo é importante listar todos os campos previstos na aplicação, caso tenha algum não previsto, ele acusará no teste
   it { is_expected.to respond_to(:name) }
+  it { is_expected.to have_many(:tasks).dependent(:destroy) }
   
 end

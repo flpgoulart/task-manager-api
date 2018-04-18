@@ -7,6 +7,7 @@ FactoryGirl.define do
         
         #como no modelo temos o belongs_to para user, o FactoryGirl cria automaticamente um usuário utilizando a associação
         user
+        task_type
     end 
 
 end 
